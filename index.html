@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AtomAI Clipper — Turn Articles into Atomic Notes</title>
+<title>AtomAIClipper — Turn Articles into Atomic Notes</title>
 <meta name="description" content="AI-powered Chrome extension that splits web articles into perfectly structured atomic notes for Obsidian. Clip, split, save — in seconds.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Satoshi:wght@400;500;700&display=swap" rel="stylesheet">
@@ -21,7 +21,6 @@
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
 
   body {
@@ -523,6 +522,18 @@
     margin-left: 6px;
   }
 
+  /* ── Install note ── */
+  .note-box{
+    max-width: 760px;
+    margin: 18px auto 0;
+    background: rgba(0,0,0,0.035);
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 12px;
+    padding: 14px 16px;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
   /* ── Footer ── */
   footer {
     padding: 60px 0 40px;
@@ -539,6 +550,7 @@
     gap: 28px;
     justify-content: center;
     margin-bottom: 20px;
+    flex-wrap: wrap;
   }
 
   .footer-links a { font-size: 0.88rem; font-weight: 500; }
@@ -570,13 +582,24 @@
 </head>
 <body>
 
+<script>
+  // === EDIT THESE LINKS ===
+  // Put your real Chrome Web Store URL here when ready.
+  // If not ready, keep it pointing to GitHub as a temporary install page.
+  const CHROME_WEB_STORE_URL = "https://chromewebstore.google.com/detail/YOUR_EXTENSION_ID";
+  const GITHUB_REPO_URL = "https://github.com/kostolany92/atomai-clipper";
+
+  // Fallback if Web Store URL is not ready yet
+  const INSTALL_URL = (CHROME_WEB_STORE_URL.includes("YOUR_EXTENSION_ID")) ? GITHUB_REPO_URL : CHROME_WEB_STORE_URL;
+</script>
+
 <!-- Nav -->
 <nav>
   <div class="container">
-    <div class="logo">
+    <a class="logo" href="#top" aria-label="AtomAIClipper home" style="text-decoration:none;">
       <div class="logo-icon">A</div>
-      AtomAI Clipper
-    </div>
+      AtomAIClipper
+    </a>
     <div class="nav-links">
       <a href="#how">How it works</a>
       <a href="#features">Features</a>
@@ -587,7 +610,7 @@
 </nav>
 
 <!-- Hero -->
-<section class="hero">
+<section class="hero" id="top">
   <div class="container">
     <div class="badge">Chrome Extension for Obsidian</div>
     <h1>Turn any article into<br><em>atomic notes</em></h1>
@@ -718,7 +741,7 @@
   <div class="container">
     <div class="section-label">Pricing</div>
     <h2>Start free. Upgrade when ready.</h2>
-    <p>No API key needed. No credit card required for free plan.</p>
+    <p>No API key needed. No credit card required for the Free plan.</p>
     <div class="pricing-grid">
       <div class="pricing-card reveal">
         <div class="pricing-name">Free</div>
@@ -733,6 +756,7 @@
         </ul>
         <a href="#install" class="btn-outline" style="width:100%;justify-content:center;">Get Started</a>
       </div>
+
       <div class="pricing-card featured reveal">
         <div class="popular-badge">MOST POPULAR</div>
         <div class="pricing-name">Pro Monthly</div>
@@ -742,11 +766,12 @@
         <ul class="pricing-features">
           <li class="pricing-feature">300 clips per month</li>
           <li class="pricing-feature">Everything in Free</li>
-          <li class="pricing-feature">Vault-Aware backlinks (soon)</li>
+          <li class="pricing-feature">Vault-aware backlinks (soon)</li>
           <li class="pricing-feature">Custom templates (soon)</li>
         </ul>
-        <a href="#install" class="btn-cta">Upgrade to Pro</a>
+        <a href="#install" class="btn-cta">Install & upgrade</a>
       </div>
+
       <div class="pricing-card reveal">
         <div class="pricing-name">Pro Annual</div>
         <div class="pricing-price">$59 <span>/yr</span></div>
@@ -758,21 +783,28 @@
           <li class="pricing-feature">Priority support</li>
           <li class="pricing-feature">2 months free</li>
         </ul>
-        <a href="#install" class="btn-cta" style="background:var(--sage);">Save with Annual</a>
+        <a href="#install" class="btn-cta" style="background:var(--sage);">Install & upgrade</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
+<!-- CTA / Install -->
 <section style="padding:100px 0;text-align:center;" id="install">
   <div class="container">
     <h2 style="margin-bottom:16px;">Ready to atomize your reading?</h2>
-    <p style="margin-bottom:36px;max-width:480px;margin-left:auto;margin-right:auto;">Install AtomAI Clipper and turn your next article into atomic notes — in seconds, not hours.</p>
-    <a href="#" class="btn-cta" style="font-size:1.05rem;padding:16px 36px;">
+    <p style="margin-bottom:22px;max-width:520px;margin-left:auto;margin-right:auto;">
+      Install AtomAIClipper and turn your next article into atomic notes — in seconds, not hours.
+    </p>
+
+    <a id="installLink" href="#" class="btn-cta" style="font-size:1.05rem;padding:16px 36px;">
       <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-5-5 1.41-1.41L11 14.17l7.59-7.59L20 8l-9 9z" fill="currentColor"/></svg>
-      Add to Chrome — It's Free
+      Add to Chrome — Free
     </a>
+
+    <div class="note-box">
+      Free plan includes <strong>10 clips/month</strong>. Upgrade to Pro inside the extension anytime.
+    </div>
   </div>
 </section>
 
@@ -780,16 +812,21 @@
 <footer>
   <div class="container">
     <div class="footer-links">
-      <a href="#">Chrome Web Store</a>
-      <a href="#">GitHub</a>
+      <a id="webstoreLink" href="#" target="_blank" rel="noopener">Chrome Web Store</a>
+      <a id="githubLink" href="#" target="_blank" rel="noopener">GitHub</a>
       <a href="mailto:support@atomai-clipper.com">Contact</a>
-      <a href="#">Privacy Policy</a>
+      <a href="./privacy.html">Privacy Policy</a>
     </div>
-    <p>© 2026 AtomAI Clipper. Made for the Obsidian community.</p>
+    <p>© 2026 AtomAIClipper. Made for the Obsidian community.</p>
   </div>
 </footer>
 
 <script>
+  // Wire up links
+  document.getElementById("installLink").href = INSTALL_URL;
+  document.getElementById("webstoreLink").href = (CHROME_WEB_STORE_URL.includes("YOUR_EXTENSION_ID")) ? INSTALL_URL : CHROME_WEB_STORE_URL;
+  document.getElementById("githubLink").href = GITHUB_REPO_URL;
+
   // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
